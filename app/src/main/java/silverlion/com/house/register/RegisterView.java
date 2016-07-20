@@ -1,11 +1,11 @@
-package silverlion.com.house.login;
+package silverlion.com.house.register;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 /**
- * Created by k8190 on 2016/7/19.
+ * Created by k8190 on 2016/7/20.
  */
-public interface LoginView extends MvpView{
+public interface RegisterView extends MvpView{
 
     void ShowProgress();
 
