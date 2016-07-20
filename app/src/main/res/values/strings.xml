@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">House</string>
+    <string name="account_text">手机号码/邮箱</string>
+    <string name="password_text">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="forgetthepassword">忘记密码？</string>
+    <string name="register">注册</string>
+</resources>

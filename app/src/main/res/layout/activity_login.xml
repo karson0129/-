@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context="silverlion.com.house.login.LoginActivity">
+    
+    <EditText
+        android:id="@+id/account_editext"
+        android:layout_width="326.33dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/account_text"
+        android:textColorHint="#656565"
+        android:background="@drawable/editext_myslyte"
+        android:drawableLeft="@drawable/account_pic"
+        android:textSize="14dp"
+        android:drawablePadding="10dp"
+        />
+
+    <EditText
+        android:id="@+id/password_editext"
+        android:layout_width="326.33dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/account_editext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10.75dp"
+        android:background="@drawable/editext_myslyte"
+        android:textColorHint="#656565"
+        android:textSize="14dp"
+        android:drawableLeft="@drawable/password_pic"
+        android:inputType="textPassword"
+        android:drawablePadding="5dp"
+        android:hint="@string/password_text"/>
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="326.33dp"
+        android:layout_height="50dp"
+        android:text="@string/login"
+        android:textSize="15.73dp"
+        android:layout_below="@id/password_editext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21.5dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/btn_loginstyle"/>
+    
+    <TextView
+        android:id="@+id/forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgetthepassword"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:layout_below="@id/login_btn"
+        android:layout_marginTop="19dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="43dp"/>
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+        android:layout_below="@id/login_btn"
+        android:layout_marginTop="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="43dp"/>
+
+</RelativeLayout>
