@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import silverlion.com.house.R;
 import silverlion.com.house.commous.ActivityUtils;
 import silverlion.com.house.components.ProgressDialogFragment;
+import silverlion.com.house.forget.ForgetActivity;
 import silverlion.com.house.register.RegisterActivity;
 
 public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> implements LoginView{
@@ -45,7 +46,7 @@ public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> impleme
                     activityUtils.startActivity(RegisterActivity.class);
                 break;
             case R.id.forget_password:
-
+                    activityUtils.startActivity(ForgetActivity.class);
                 break;
         }
     }

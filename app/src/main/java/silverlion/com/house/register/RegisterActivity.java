@@ -1,12 +1,15 @@
 package silverlion.com.house.register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import silverlion.com.house.R;
@@ -20,6 +23,8 @@ import silverlion.com.house.emailregister.EmailActivity;
 public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter> implements RegisterView{
     private ActivityUtils activityUtils;
     private ProgressDialogFragment progressDialogFragment;
+    @Bind(R.id.number)LinearLayout area_code;
+
     @NonNull
     @Override
     public RegisterPresenter createPresenter() {
@@ -38,7 +43,7 @@ public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter
         super.onContentChanged();
         ButterKnife.bind(this);
     }
-    @OnClick({R.id.email,R.id.cancel})
+    @OnClick({R.id.email,R.id.cancel,R.id.number})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.email:
@@ -46,6 +51,8 @@ public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter
                 break;
             case R.id.cancel:
                 finish();
+                break;
+            case R.id.number:
                 break;
         }
     }

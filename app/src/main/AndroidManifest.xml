@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".emailregister.EmailActivity" />
-        <activity android:name=".forget.ForgetActivity"></activity>
+        <activity android:name=".forget.ForgetActivity" />
+        <activity android:name=".forgetemail.ForgetEmailActivity" />
+        <activity android:name=".forgetemail.WebActivity"></activity>
     </application>
 
 </manifest>

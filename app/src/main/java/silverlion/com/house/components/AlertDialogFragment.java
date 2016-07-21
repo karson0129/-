@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
-import com.feicuiedu.treasurehunter.R;
+import silverlion.com.house.R;
 
 
 public class AlertDialogFragment extends DialogFragment {
@@ -32,7 +32,7 @@ public class AlertDialogFragment extends DialogFragment {
         return new AlertDialog.Builder(getActivity(), getTheme())
                 .setTitle(title)
                 .setMessage(msg)
-                .setNeutralButton(R.string.OK, new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

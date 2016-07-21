@@ -39,7 +39,7 @@
         android:background="#F6F6F6"></View>
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5"
+        android:layout_height="0.5dp"
         android:background="#E4E4E4"></View>
 
     <RelativeLayout
