@@ -12,4 +12,6 @@ public interface RegisterView extends MvpView{
     void HideProgress();
 
     void ShowMassage(String msg);
+
+    void GoToverify(RegisterResult result);
 }

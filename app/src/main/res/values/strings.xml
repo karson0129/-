@@ -28,4 +28,5 @@
     <string name="sendEmail">邮件已发送到您的邮箱</string>
     <string name="hintEmail">请查看邮箱并按提示操作重置密码</string>
     <string name="actionEmail">前往邮箱</string>
+    <string name="seek">搜索</string>
 </resources>

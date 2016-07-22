@@ -68,12 +68,13 @@
             android:hint="@string/register_password"
             android:inputType="textPassword"
             android:background="@drawable/number_style"/>
-        <ImageView
+        <CheckBox
             android:id="@+id/showpassword"
             android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/showhidepassword"
+            android:background="@drawable/showhidepassword"
+            android:button="@null"
             android:layout_marginRight="10dp"/>
     </LinearLayout>
     <View

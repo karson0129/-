@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="silverlion.com.house">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +23,9 @@
         <activity android:name=".emailregister.EmailActivity" />
         <activity android:name=".forget.ForgetActivity" />
         <activity android:name=".forgetemail.ForgetEmailActivity" />
-        <activity android:name=".forgetemail.WebActivity"></activity>
+        <activity android:name=".forgetemail.WebActivity" />
+        <activity android:name=".register.sortlistview.SoetiListActivity" />
+        <activity android:name=".verify.VerfiyActivity"></activity>
     </application>
 
 </manifest>

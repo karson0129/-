@@ -52,7 +52,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/number_style"
-            android:text="@string/youremail"
+            android:hint="@string/youremail"
             android:layout_marginLeft="10dp"
             android:textColor="#9A9A9A"/>
         <TextView
