@@ -12,4 +12,12 @@ public interface ForgetView extends MvpView{
     void hideProgress();
 
     void showMessage(String msg);
+
+    void showPhoneText();
+
+    void showVerText();
+
+    void GotoNewPassword(ForgetVerResult result);
+
+    void getACcountID(String id);
 }

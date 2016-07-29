@@ -4,35 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#262626"
-        android:orientation="horizontal">
+        android:background="#262626">
         <TextView
             android:id="@+id/cancel"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:layout_gravity="center_vertical"
-            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:gravity="center"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:layout_marginLeft="10dp"/>
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/register"
-            android:textSize="25dp"
-            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="#FFFFFF"/>
-        <View
-            android:layout_width="60dp"
-            android:layout_height="0dp"></View>
-    </LinearLayout>
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
@@ -52,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/city"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
         
@@ -134,14 +130,14 @@
             android:text="@string/note"
             android:layout_below="@+id/register"
             android:layout_alignLeft="@id/register"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_marginTop="20dp"/>
         <TextView
             android:id="@+id/contract"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/contract"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_toRightOf="@+id/note"
             android:textColor="#45a8fc"
             android:layout_alignBottom="@+id/note"/>

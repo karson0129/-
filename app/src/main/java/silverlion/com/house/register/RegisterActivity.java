@@ -34,6 +34,8 @@ import silverlion.com.house.verify.VerfiyActivity;
  * Created by k8190 on 2016/7/20.
  */
 public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter> implements RegisterView{
+    private final int PHOME_ID = 1;
+    private final int REQUEST = 0x12;
     private ActivityUtils activityUtils;
     private ProgressDialogFragment progressDialogFragment;
     @Bind(R.id.country)TextView country;
@@ -50,13 +52,11 @@ public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter
         super.onCreate(savedInstanceState);
         activityUtils = new ActivityUtils(this);
         setContentView(R.layout.activity_register);
-
     }
     @Override
     public void onContentChanged() {
         super.onContentChanged();
         ButterKnife.bind(this);
-        showpassword.setOnCheckedChangeListener(listener);
         phone_number.addTextChangedListener(mTextWatcher);
         password.addTextChangedListener(mTextWatcher);
     }
@@ -75,6 +75,15 @@ public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter
             canRegister = RegexUtils.isPhone(phone) && RegexUtils.verifyPassword(passW)==0;
         }
     };
+    @OnCheckedChanged(R.id.showpassword)
+    public void onChangeclick(boolean isChecked){
+        if (isChecked) {
+            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            }
+        else {
+            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
+    }
 
     @OnClick({R.id.email,R.id.cancel,R.id.number,R.id.register})
     public void onClick(View view){
@@ -87,7 +96,7 @@ public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter
                 break;
             case R.id.number:
                 Intent intent = new Intent(RegisterActivity.this, SoetiListActivity.class);
-                startActivityForResult(intent,0x12);
+                startActivityForResult(intent,REQUEST);
                 break;
             case R.id.register:
                 if (canRegister){
@@ -98,20 +107,7 @@ public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter
                 break;
         }
     }
-    public CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            System.out.print(isChecked);
-            if (isChecked) {
-                // 显示密码
-                showpassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            }
-            else {
-                // 隐藏密码
-                showpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            }
-        }
-    };
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -141,6 +137,8 @@ public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter
         Intent intent = new Intent(RegisterActivity.this, VerfiyActivity.class);
         intent.putExtra("verfiy_id",result.getCode_id());
         intent.putExtra("verfiy",result.getVerify_code());
+        intent.putExtra("area",area);
+        intent.putExtra("id",PHOME_ID);
         intent.putExtra("password",passW);
         intent.putExtra("phone",phone);
         startActivity(intent);

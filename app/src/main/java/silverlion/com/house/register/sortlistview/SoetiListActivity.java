@@ -33,14 +33,8 @@ public class SoetiListActivity extends AppCompatActivity {
 	private TextView dialog;
 	private SortAdapter adapter;
 	private ClearEditText mClearEditText;
-	/**
-	 * ����ת����ƴ������
-	 */
 	private CharacterParser characterParser;
 	private List<SortModel> SourceDateList;
-	/**
-	 * ����ƴ��������ListView�����������
-	 */
 	private PinyinComparator pinyinComparator;
 	private final String AREA_CODE = "http://casadiario.com/OpenDC/index.php/App/Account/area_code";
 	private List<SortModel> list = new ArrayList<SortModel>();
@@ -60,7 +54,7 @@ public class SoetiListActivity extends AppCompatActivity {
 	private void net(){
 		if (!list.isEmpty())list.clear();
 		HttpUtils utils = new HttpUtils();
-		utils.send(HttpMethod.GET, AREA_CODE, new RequestCallBack<String>() {
+		utils.send(HttpMethod.POST, AREA_CODE, new RequestCallBack<String>() {
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				activityUtils.showToast("链接失败，请检查网络连接");
@@ -89,16 +83,12 @@ public class SoetiListActivity extends AppCompatActivity {
 	}
 
 	private void initViews() {
-		//ʵ��������תƴ����
 		characterParser = CharacterParser.getInstance();
-
 		pinyinComparator = new PinyinComparator();
-
 		sideBar = (SideBar) findViewById(R.id.sidrbar);
 		dialog = (TextView) findViewById(R.id.dialog);
 		sideBar.setTextView(dialog);
 
-		//�����Ҳഥ������
 		sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
 
 			@Override
@@ -133,7 +123,6 @@ public class SoetiListActivity extends AppCompatActivity {
 		sortListView.setAdapter(adapter);
 		mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
 
-		//�������������ֵ�ĸı�����������
 		mClearEditText.addTextChangedListener(new TextWatcher() {
 
 			@Override

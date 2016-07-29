@@ -29,4 +29,27 @@
     <string name="hintEmail">请查看邮箱并按提示操作重置密码</string>
     <string name="actionEmail">前往邮箱</string>
     <string name="seek">搜索</string>
+    <string name="put_verfiy">填写验证码</string>\
+    <string name="commit">提交</string>
+    <string name="personal">个人信息</string>
+    <string name="name">姓名</string>
+    <string name="name_input">请输入真实姓名</string>
+    <string name="sex">性别</string>
+    <string name="address">地址</string>
+    <string name="address_input">请输入现居地址</string>
+    <string name="callphone">联系电话</string>
+    <string name="phone_input">请输入联系电话</string>
+    <string name="Email">Email</string>
+    <string name="kepp">保存</string>
+    <string name="area">区号</string>
+    <string name="add_from_gallery">通过相册添加</string>
+    <string name="camera">相机</string>
+    <string name="depo">我的收藏</string>
+    <string name="book">我的预约</string>
+    <string name="safety">账号与安全</string>
+    <string name="about_us">关于OPNE DAY CODE</string>
+    <string name="exit">退出登录</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

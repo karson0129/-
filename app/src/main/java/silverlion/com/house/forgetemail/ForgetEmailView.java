@@ -12,4 +12,10 @@ public interface ForgetEmailView extends MvpView {
     void hideProgress();
 
     void showMessage(String msg);
+
+    void showVerify(int i);
+
+    void hideVerify(int i);
+
+    void getVerifyID(String id);
 }

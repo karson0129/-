@@ -12,4 +12,6 @@ public interface LoginView extends MvpView{
     void HideProgress();
 
     void ShowMassage(String msg);
+
+    void GotoMain(LoginResult result);
 }

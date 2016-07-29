@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class NetClient {
-    private final String BASE_URL= "http://casadiario.com";
+    public static final String BASE_URL= "http://casadiario.com";
 
     private static NetClient sClient;
 

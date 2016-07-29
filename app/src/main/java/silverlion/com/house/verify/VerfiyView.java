@@ -13,5 +13,7 @@ public interface VerfiyView extends MvpView{
 
     void showMessage(String msg);
 
-    void GotoLogin();
+    void GotoHome(VerfiyResponse response);
+
+    void sendMessage();
 }

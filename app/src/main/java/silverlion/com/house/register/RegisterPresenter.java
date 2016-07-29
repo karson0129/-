@@ -1,9 +1,7 @@
 package silverlion.com.house.register;
 
-import android.content.Intent;
-
+import android.util.Log;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,14 +19,16 @@ public class RegisterPresenter extends MvpBasePresenter<RegisterView> {
         this.user = user;
         getView().ShowProgress();
         if (registerCall != null) registerCall.cancel();
-        registerCall = NetClient.getInstance().getUserApi().Register(user);
+        registerCall = NetClient.getInstance().getUserApi().Register(user.getArea_code(),user.getCellphone());
         registerCall.enqueue(registerCallback);
     }
 
     private Callback<RegisterResult> registerCallback = new Callback<RegisterResult>() {
         @Override
         public void onResponse(Call<RegisterResult> call, Response<RegisterResult> response) {
+            getView().HideProgress();
             RegisterResult result = response.body();
+            Log.i("result",result.toString());
             if (result == null) {
                 getView().ShowMassage("Unknown Error");
                 return;

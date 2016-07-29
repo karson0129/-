@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by k8190 on 2016/7/22.
  */
 @SuppressWarnings("user")
-public class RegisterResult {
+public final class RegisterResult {
     @SerializedName("output")
     private int output;
     @SerializedName("code_id")
@@ -15,6 +15,9 @@ public class RegisterResult {
     private String verify_code;
     @SerializedName("cellphone")
     private String cellphone;
+
+    @SerializedName("email")
+    private String  email;
 
     public int getOutput() {
         return output;
@@ -32,4 +35,18 @@ public class RegisterResult {
         return cellphone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public String toString() {
+        return "RegisterResult{" +
+                "output=" + output +
+                ", code_id='" + code_id + '\'' +
+                ", verify_code='" + verify_code + '\'' +
+                ", cellphone='" + cellphone + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

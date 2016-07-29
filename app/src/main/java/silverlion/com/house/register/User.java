@@ -7,27 +7,19 @@ import com.google.gson.annotations.SerializedName;
  */
 @SuppressWarnings("user")
 public class User {
-    public User(String account, String password) {
-        this.account = account;
-        this.password = password;
+    public User(String account, String cellphone) {
+        this.area_code = account;
+        this.cellphone = cellphone;
     }
-    @SerializedName("area_code")
-    private String account;
+    private final String area_code;
 
-    @SerializedName("cellphone")
-    private String password;
+    private final String cellphone;
 
-    public void setAccount(String account){
-        this.account = account;
+    public String getArea_code() {
+        return area_code;
     }
-    public String getAccount(){
-        return account;
-    }
-    public void setPassword(String password){
-        this.password = password;
-    }
-    public String getPassword(){
-        return password;
+    public String getCellphone() {
+        return cellphone;
     }
 
 }
