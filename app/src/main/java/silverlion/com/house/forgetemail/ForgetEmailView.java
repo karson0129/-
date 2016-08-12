@@ -18,4 +18,6 @@ public interface ForgetEmailView extends MvpView {
     void hideVerify(int i);
 
     void getVerifyID(String id);
+
+    void GotoNewPass();
 }

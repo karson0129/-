@@ -16,4 +16,6 @@ public interface PersonalView extends MvpView {
     void GotoMain();
 
     void updateAvatar(String url);
+
+    void updatePersonal(PersonalResult result);
 }

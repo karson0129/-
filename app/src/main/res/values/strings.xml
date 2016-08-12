@@ -49,6 +49,24 @@
     <string name="safety">账号与安全</string>
     <string name="about_us">关于OPNE DAY CODE</string>
     <string name="exit">退出登录</string>
+    <string name="nature">性质</string>
+    <string name="house_code">房产编号</string>
+    <string name="place">地区</string>
+    <string name="house_class">房产类型</string>
+    <string name="house_status">房产状态</string>
+    <string name="price">价格</string>
+    <string name="immigrant">可否移民</string>
+    <string name="usable_area">实用面积</string>
+    <string name="bookhouse">预约看房</string>
+
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+
+    <string name="scan_text">请对准二维码</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

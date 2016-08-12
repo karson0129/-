@@ -1,12 +1,14 @@
 package silverlion.com.house.houselist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -15,28 +17,55 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import silverlion.com.house.R;
 import silverlion.com.house.commous.ActivityUtils;
+import silverlion.com.house.qrcode.MipcaActivityCapture;
 
 /**
 
  */
-public class HouseListFragment extends MvpFragment<HouseListView,HouseListPersenter> implements HouseListView {
+public class HouseListFragment extends MvpFragment<HouseListView,HouseListPersenter> implements HouseListView,AdapterView.OnItemClickListener{
     private ActivityUtils activityUtils;
     private List<HouseListResult> housedata = new ArrayList<HouseListResult>();
     private final String HOUSELIST = "http://casadiario.com/OpenDC/index.php/App/House/house_list";
     private HouseListAdapter adapter;
-    private ListView list;
+    @Bind(R.id.list)ListView list;
+
+    @Override public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activityUtils = new ActivityUtils(this);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        activityUtils = new ActivityUtils(this);
         View view = inflater.inflate(R.layout.fragment_house_list, container, false);
-        list = (ListView) view.findViewById(R.id.list);
+        ButterKnife.bind(this,view);
         init();
+        list.setOnItemClickListener(this);
         return view;
+    }
+
+    @OnClick(R.id.scan)
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.scan:
+                Intent intent = new Intent(getActivity(), MipcaActivityCapture.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(),HouseActivity.class);
+        intent.putExtra("id", adapter.getItem(position).getId());
+        startActivity(intent);
     }
 
     private void init(){
@@ -57,6 +86,9 @@ public class HouseListFragment extends MvpFragment<HouseListView,HouseListPersen
                     JSONObject house_2 = object.getJSONObject("h2016052474236");
                     housedata.add(new HouseListResult(house_2.getString("id"),house_2.getString("0"),
                             house_2.getString("place"),house_2.getString("address"),house_2.getString("reg_time")));
+                    JSONObject house_3 = object.getJSONObject("h2016072917814");
+                    housedata.add(new HouseListResult(house_3.getString("id"),house_3.getString("0"),
+                            house_3.getString("place"),house_3.getString("address"),house_3.getString("reg_time")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

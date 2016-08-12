@@ -23,7 +23,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp" />
 
-    <Button
+    <!--<Button-->
+        <!--android:id="@+id/login_btn"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:text="@string/login"-->
+        <!--android:textSize="16dp"-->
+        <!--android:layout_below="@id/context_passwork"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="21.5dp"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:background="@drawable/btn_loginstyle"/>-->
+    <silverlion.com.house.components.ActionProcessButton
         android:id="@+id/login_btn"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -34,7 +45,7 @@
         android:layout_marginTop="21.5dp"
         android:textColor="#ffffff"
         android:background="@drawable/btn_loginstyle"/>
-    
+
     <TextView
         android:id="@+id/forget_password"
         android:layout_width="wrap_content"

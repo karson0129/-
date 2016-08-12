@@ -121,6 +121,11 @@ public class VerfiyActivity extends MvpActivity<VerfiyView,VerfiyPresenter> impl
         }
     };
 
+    @Override
+    public void GetAccouID(String id) {
+        this.verfiy_id = id;
+    }
+
     @OnClick({R.id.register,R.id.cancel,R.id.service})
     public void onClick(View view){
         switch (view.getId()){
@@ -159,10 +164,14 @@ public class VerfiyActivity extends MvpActivity<VerfiyView,VerfiyPresenter> impl
         activityUtils.showToast(msg);
     }
 
+
+    private final int VERFIY = 1;
+
     @Override
     public void GotoHome(VerfiyResponse response) {
         Intent intent = new Intent(VerfiyActivity.this,PersonalActivity.class);
         intent.putExtra("accout_id",response.getAccout_id());
+        intent.putExtra("select",VERFIY);
         startActivity(intent);
         finish();
     }

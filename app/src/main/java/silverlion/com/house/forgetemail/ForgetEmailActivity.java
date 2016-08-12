@@ -1,10 +1,13 @@
 package silverlion.com.house.forgetemail;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,11 +19,13 @@ import silverlion.com.house.R;
 import silverlion.com.house.commous.ActivityUtils;
 import silverlion.com.house.commous.RegexUtils;
 import silverlion.com.house.components.ProgressDialogFragment;
+import silverlion.com.house.newpassphone.NewPassPhoneActivity;
 import silverlion.com.house.register.User;
 
 public class ForgetEmailActivity extends MvpActivity<ForgetEmailView,ForgetEmailPresenter> implements ForgetEmailView {
     private ActivityUtils activityUtils;
     private ProgressDialogFragment progressDialogFragment;
+    private TextView area_tv,phone_tv;
     @Bind(R.id.email)EditText email_et;
     @Bind(R.id.verification)EditText verify_et;
     @Bind(R.id.notphone)TextView not;
@@ -28,6 +33,7 @@ public class ForgetEmailActivity extends MvpActivity<ForgetEmailView,ForgetEmail
     private String email;
     private String verify;
     private String id;
+    private AlertDialog alertDialog;
 
     private boolean action,send;
     @Override
@@ -45,10 +51,37 @@ public class ForgetEmailActivity extends MvpActivity<ForgetEmailView,ForgetEmail
                 finish();
                 break;
             case R.id.verification_text:
-                presenter.GetVerify(new User(email,null));
+                if (action) {
+                    View aler = LayoutInflater.from(this).inflate(R.layout.context_aler_phone, null, false);
+                    area_tv = (TextView) aler.findViewById(R.id.area);
+                    phone_tv = (TextView) aler.findViewById(R.id.phone);
+                    area_tv.setText("我们将发送验证到邮箱");
+                    phone_tv.setText(email);
+                    aler.findViewById(R.id.agree).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            presenter.GetVerify(new User(email,null));
+                            alertDialog.dismiss();
+                        }
+                    });
+                    aler.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+                    alertDialog = new AlertDialog.Builder(this).setView(aler).create();
+                    alertDialog.show();
+                }else {
+                    activityUtils.showToast("请输入正确的邮箱地址");
+                }
                 break;
             case R.id.action:
-
+                if (send){
+                    presenter.NewPass(id,new User(verify,email));
+                }else {
+                    activityUtils.showToast("请输入邮箱和验证码");
+                }
                 break;
         }
     }
@@ -86,7 +119,7 @@ public class ForgetEmailActivity extends MvpActivity<ForgetEmailView,ForgetEmail
         if (i == 1){
             not.setVisibility(View.INVISIBLE);
         }else if (i == 2){
-            nover.setVisibility(View.VISIBLE);
+            nover.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -103,6 +136,15 @@ public class ForgetEmailActivity extends MvpActivity<ForgetEmailView,ForgetEmail
         email_et.addTextChangedListener(listener);
     }
 
+    @Override
+    public void GotoNewPass() {
+        Intent intent = new Intent(ForgetEmailActivity.this, NewPassPhoneActivity.class);
+        intent.putExtra("email",email);
+        intent.putExtra("id",2);
+        startActivity(intent);
+        finish();
+    }
+
     private TextWatcher listener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -112,6 +154,8 @@ public class ForgetEmailActivity extends MvpActivity<ForgetEmailView,ForgetEmail
 
         @Override
         public void afterTextChanged(Editable s) {
+            hideVerify(1);
+            hideVerify(2);
             email = email_et.getText().toString();
             verify = verify_et.getText().toString();
             action = RegexUtils.isEmail(email);

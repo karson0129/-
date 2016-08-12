@@ -28,7 +28,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@drawable/selector_house"
                 android:gravity="center"
                 android:textColor="@drawable/radio_text"
                 android:text="房源"/>
@@ -39,7 +38,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@drawable/selector_message"
                 android:gravity="center"
                 android:textColor="@drawable/radio_text"
                 android:text="信息"/>
@@ -50,7 +48,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@drawable/selector_myself"
                 android:gravity="center"
                 android:textColor="@drawable/radio_text"
                 android:text="我"/>

@@ -27,6 +27,8 @@ public class NewPassPhoneActivity extends MvpActivity<NewPassPhoneView,NewPassPh
     private String phone;
     private String password;
     private String agree;
+    private String email;
+    private int id;
     private boolean action;
     @Bind(R.id.password)EditText password_et;
     @Bind(R.id.agree)EditText agree_et;
@@ -38,6 +40,8 @@ public class NewPassPhoneActivity extends MvpActivity<NewPassPhoneView,NewPassPh
         setContentView(R.layout.activity_new_pass_phone);
         Intent intent = getIntent();
         phone = intent.getStringExtra("phone");
+        email = intent.getStringExtra("email");
+        id = intent.getIntExtra("id",0);
     }
 
     @Override
@@ -55,7 +59,11 @@ public class NewPassPhoneActivity extends MvpActivity<NewPassPhoneView,NewPassPh
                 break;
             case R.id.action:
                     if (action){
-                        presenter.action(new User(password,phone));
+                        if (id == 1){
+                            presenter.Action(new User(password, phone));
+                        }else if (id == 2){
+                            presenter.EmailACtion(new User(password,email));
+                        }
                     }else {
                         activityUtils.showToast("请输入正确的密码");
                         not.setVisibility(View.VISIBLE);

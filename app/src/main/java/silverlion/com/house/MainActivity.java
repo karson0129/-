@@ -1,5 +1,9 @@
 package silverlion.com.house;
 
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import silverlion.com.house.commous.ActivityUtils;
+import silverlion.com.house.components.MianRadioButton;
 import silverlion.com.house.houselist.HouseListFragment;
 import silverlion.com.house.message.MessageFragment;
 import silverlion.com.house.myself.MySelfFragment;
@@ -27,19 +32,39 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     private MessageFragment messageFragment = new MessageFragment();
     private List<Fragment> list_fm = new ArrayList<Fragment>();
     private FragmentTransaction transaction;
+    private  String accout_id;
     private FragmentManager manager;
     private long time;
     @Bind(R.id.house)RadioButton house;
+    @Bind(R.id.message)RadioButton message;
+    @Bind(R.id.myself)RadioButton myself;
     @Bind(R.id.group)RadioGroup group;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityUtils = new ActivityUtils(this);
         setContentView(R.layout.activity_main);
+        initview();
         initFragment();
         showFragment(0);
         group.setOnCheckedChangeListener(this);
         house.setChecked(true);
+
+    }
+
+    private void initview(){
+        Resources res = this.getResources();
+        Drawable drawable = res.getDrawable(R.drawable.selector_house);
+        drawable.setBounds(1, 1, 100, 100);
+        house.setCompoundDrawables(null, drawable, null, null);
+
+        Drawable drawable1 = res.getDrawable(R.drawable.selector_message);
+        drawable1.setBounds(1, 1, 100, 100);
+        message.setCompoundDrawables(null, drawable1, null, null);
+
+        Drawable drawable2 = res.getDrawable(R.drawable.selector_myself);
+        drawable2.setBounds(1, 1, 75, 100);
+        myself.setCompoundDrawables(null, drawable2, null, null);
     }
 
     @Override

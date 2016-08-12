@@ -176,6 +176,7 @@ public class ForgetActivity extends MvpActivity<ForgetView,ForgetPresenter> impl
     public void GotoNewPassword(ForgetVerResult result) {
         Intent intent = new Intent(ForgetActivity.this,NewPassPhoneActivity.class);
         intent.putExtra("phone",result.getPhone());
+        intent.putExtra("id",1);
         startActivity(intent);
         finish();
     }

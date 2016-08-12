@@ -1,6 +1,7 @@
 package silverlion.com.house.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,15 +17,26 @@ import silverlion.com.house.MainActivity;
 import silverlion.com.house.R;
 import silverlion.com.house.commous.ActivityUtils;
 import silverlion.com.house.commous.RegexUtils;
+import silverlion.com.house.components.ActionProcessButton;
 import silverlion.com.house.components.ProgressDialogFragment;
+import silverlion.com.house.components.ProgressGenerator;
 import silverlion.com.house.forget.ForgetActivity;
 import silverlion.com.house.register.RegisterActivity;
 import silverlion.com.house.register.User;
+import android.content.SharedPreferences.Editor;
 
-public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> implements LoginView{
+public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> implements LoginView,ProgressGenerator.OnCompleteListener{
     @Bind(R.id.account_editext)EditText account_ed;
     @Bind(R.id.password_editext)EditText password_ed;
+    @Bind(R.id.login_btn)ActionProcessButton login_btn;
     private ProgressDialogFragment progressDialogFragment;
+    private ProgressGenerator progressGenerator;
+
+    @Override
+    public void onComplete() {
+        presenter.Login(new User(account,password));
+    }
+
     private ActivityUtils activityUtils;
     private String account;
     private String password;
@@ -34,6 +46,7 @@ public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> impleme
         super.onCreate(savedInstanceState);
         activityUtils = new ActivityUtils(this);
         setContentView(R.layout.activity_login);
+        login_btn.setMode(ActionProcessButton.Mode.ENDLESS);
     }
     @Override
     public void onContentChanged() {
@@ -59,7 +72,9 @@ public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> impleme
                 break;
             case R.id.login_btn:
                 if (CanLogin){
-                    presenter.Login(new User(account,password));
+                    progressGenerator = new ProgressGenerator(this);
+                    progressGenerator.start(login_btn);
+//                    presenter.Login(new User(account, password));
                 }else {
                     activityUtils.showToast("请输入账号和密码");
                 }
@@ -104,6 +119,10 @@ public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> impleme
     @Override
     public void GotoMain(LoginResult result) {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        SharedPreferences spf = getSharedPreferences("first",0);//保存用户信息
+        Editor edit = spf.edit();
+        edit.putString("user_id",result.getAccout());
+        edit.commit();
         intent.putExtra("account_id",result.getAccout());
         intent.putExtra("nofi",result.getNo_file());
         startActivity(intent);

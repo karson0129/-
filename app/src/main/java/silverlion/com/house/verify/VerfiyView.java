@@ -16,4 +16,6 @@ public interface VerfiyView extends MvpView{
     void GotoHome(VerfiyResponse response);
 
     void sendMessage();
+
+    void GetAccouID(String id);
 }

@@ -98,11 +98,13 @@ public class VerfiyPresenter extends MvpBasePresenter<VerfiyView>{
         public void onResponse(Call<RegisterResult> call, Response<RegisterResult> response) {
             getView().hideProgress();
             RegisterResult result = response.body();
+            Log.i("result",result.toString());
             if (result == null) {
                 getView().showMessage("Unknown Error");
                 return;
             }
             //发信息
+            getView().GetAccouID(result.getCode_id());
         }
         @Override
         public void onFailure(Call<RegisterResult> call, Throwable t) {

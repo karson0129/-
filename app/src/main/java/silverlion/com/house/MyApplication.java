@@ -14,7 +14,7 @@ public class MyApplication extends Application {
 
     @Override public void onCreate() {
         super.onCreate();
-        ImageLoader.getInstance().init(new ImageLoaderConfiguration.Builder(this).build());
+        ImageLoader.getInstance().init(new ImageLoaderConfiguration.Builder(this).writeDebugLogs().build());
         UserPrefs.init(this);
     }
 }
