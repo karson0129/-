@@ -1,7 +1,10 @@
 package silverlion.com.house.houselist.housedetails;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +14,11 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.model.*;
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import silverlion.com.house.R;
@@ -20,7 +27,7 @@ import silverlion.com.house.components.ProgressDialogFragment;
 import silverlion.com.house.houselist.HouseActivity;
 import silverlion.com.house.register.User;
 
-public class HouseDetailsFragment extends MvpFragment<HouseDetailsView,HouseDetailsPersenter> implements HouseDetailsView{
+public class HouseDetailsFragment extends MvpFragment<HouseDetailsView, HouseDetailsPersenter> implements HouseDetailsView,OnMapReadyCallback{
     private ActivityUtils activityUtils;
     private ProgressDialogFragment progressDialogFragment;
     private String list_id = HouseActivity.list_id;//获取房源id
@@ -28,28 +35,50 @@ public class HouseDetailsFragment extends MvpFragment<HouseDetailsView,HouseDeta
     public static String promulgator_id;//发布者ID
     private GridDepolyAdapter adapter;
     private GridConvenienceAdapter convenienceAdapter;
-    @Bind(R.id.viewpager)ViewPager viewPager;
-    @Bind(R.id.left)Button left_btn;
-    @Bind(R.id.right)Button right_btn;
-
-    @Bind(R.id.address)TextView address_tv;//地址
-    @Bind(R.id.nature)TextView nature_tv;//房屋性质
-    @Bind(R.id.house_code)TextView house_code;//房屋编号
-    @Bind(R.id.place)TextView place_tv;//地区
-    @Bind(R.id.house_class)TextView house_class;//房屋类型
-    @Bind(R.id.house_status)TextView house_status;//房屋状态
-    @Bind(R.id.price)TextView price_tv;//房屋价格
-    @Bind(R.id.immigrant)TextView immigrant;//移民
-    @Bind(R.id.usable_area)TextView usable_tv;//实用面积
-    @Bind(R.id.area)TextView area_tv;//房子面积
-    @Bind(R.id.house_area)TextView house_tv;//建筑面积
-    @Bind(R.id.house_deploy)GridView grid_depoly;//配套
-    @Bind(R.id.house_convenience)GridView grid_convenience;//便利性
-    @Bind(R.id.user_iamge1)ImageView user_iv1;//用户信息图片1
-    @Bind(R.id.user_iamge2)ImageView user_iv2;//用户信息图片2
-    @Bind(R.id.linkman)TextView linkman_tv;//联系人
-    @Bind(R.id.linkphone)TextView linkphone_tv;//联系电话
-    @Bind(R.id.linkemail)TextView email_tv;//Email
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
+    @Bind(R.id.left)
+    Button left_btn;
+    @Bind(R.id.right)
+    Button right_btn;
+//    @Bind(R.id.maps)
+//    SupportMapFragment mapFragment;//google 地图
+    @Bind(R.id.address)
+    TextView address_tv;//地址
+    @Bind(R.id.nature)
+    TextView nature_tv;//房屋性质
+    @Bind(R.id.house_code)
+    TextView house_code;//房屋编号
+    @Bind(R.id.place)
+    TextView place_tv;//地区
+    @Bind(R.id.house_class)
+    TextView house_class;//房屋类型
+    @Bind(R.id.house_status)
+    TextView house_status;//房屋状态
+    @Bind(R.id.price)
+    TextView price_tv;//房屋价格
+    @Bind(R.id.immigrant)
+    TextView immigrant;//移民
+    @Bind(R.id.usable_area)
+    TextView usable_tv;//实用面积
+    @Bind(R.id.area)
+    TextView area_tv;//房子面积
+    @Bind(R.id.house_area)
+    TextView house_tv;//建筑面积
+    @Bind(R.id.house_deploy)
+    GridView grid_depoly;//配套
+    @Bind(R.id.house_convenience)
+    GridView grid_convenience;//便利性
+    @Bind(R.id.user_iamge1)
+    ImageView user_iv1;//用户信息图片1
+    @Bind(R.id.user_iamge2)
+    ImageView user_iv2;//用户信息图片2
+    @Bind(R.id.linkman)
+    TextView linkman_tv;//联系人
+    @Bind(R.id.linkphone)
+    TextView linkphone_tv;//联系电话
+    @Bind(R.id.linkemail)
+    TextView email_tv;//Email
 
     @Override
     public HouseDetailsPersenter createPresenter() {
@@ -60,6 +89,7 @@ public class HouseDetailsFragment extends MvpFragment<HouseDetailsView,HouseDeta
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityUtils = new ActivityUtils(this);
+
     }
 
     @Nullable
@@ -67,6 +97,10 @@ public class HouseDetailsFragment extends MvpFragment<HouseDetailsView,HouseDeta
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_house_details, null);
         ButterKnife.bind(this, view);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.maps);
+        mapFragment.getMapAsync(this);
+
 //        Log.i("result", list_id);
 //        Log.i("result", account_id);
         return view;
@@ -76,6 +110,18 @@ public class HouseDetailsFragment extends MvpFragment<HouseDetailsView,HouseDeta
     public void onStart() {
         super.onStart();
         presenter.HouseDetails(new User(list_id, account_id));
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng sydney = new LatLng(-33.867, 151.206);
+//        googleMap.setMyLocationEnabled(true);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+
+        googleMap.addMarker(new MarkerOptions()
+                .title("Sydney")
+                .snippet("The most populous city in Australia.")
+                .position(sydney));
     }
 
     @Override

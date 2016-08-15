@@ -33,7 +33,7 @@ public class HouseDetailsPersenter extends MvpBasePresenter<HouseDetailsView>{
 
         @Override
         public void onFailure(Call<HouseDetailsResult> call, Throwable t) {
-            getView().showMessage(t.toString());
+            if (t.toString() != null)getView().showMessage(t.toString());
         }
     };
 }

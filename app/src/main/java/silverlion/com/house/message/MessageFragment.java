@@ -86,7 +86,7 @@ public class MessageFragment extends MvpFragment<MessageView,MessagePersenter> i
 
     @Override
     public void hideProgress() {
-        if (progressDialogFragment != null)progressDialogFragment.dismiss();
+        if (progressDialogFragment.isVisible() && progressDialogFragment != null)progressDialogFragment.dismiss();
     }
     //下啦刷新
     @Override
