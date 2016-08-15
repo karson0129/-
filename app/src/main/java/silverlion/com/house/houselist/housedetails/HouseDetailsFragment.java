@@ -27,7 +27,7 @@ import silverlion.com.house.components.ProgressDialogFragment;
 import silverlion.com.house.houselist.HouseActivity;
 import silverlion.com.house.register.User;
 
-public class HouseDetailsFragment extends MvpFragment<HouseDetailsView, HouseDetailsPersenter> implements HouseDetailsView,OnMapReadyCallback{
+public class HouseDetailsFragment extends MvpFragment<HouseDetailsView, HouseDetailsPersenter> implements HouseDetailsView, OnMapReadyCallback {
     private ActivityUtils activityUtils;
     private ProgressDialogFragment progressDialogFragment;
     private String list_id = HouseActivity.list_id;//获取房源id
@@ -41,7 +41,7 @@ public class HouseDetailsFragment extends MvpFragment<HouseDetailsView, HouseDet
     Button left_btn;
     @Bind(R.id.right)
     Button right_btn;
-//    @Bind(R.id.maps)
+    //    @Bind(R.id.maps)
 //    SupportMapFragment mapFragment;//google 地图
     @Bind(R.id.address)
     TextView address_tv;//地址
@@ -97,6 +97,7 @@ public class HouseDetailsFragment extends MvpFragment<HouseDetailsView, HouseDet
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_house_details, null);
         ButterKnife.bind(this, view);
+//        SupportMapFragment mapFragment = new SupportMapFragment();
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.maps);
         mapFragment.getMapAsync(this);
@@ -106,22 +107,28 @@ public class HouseDetailsFragment extends MvpFragment<HouseDetailsView, HouseDet
         return view;
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
         presenter.HouseDetails(new User(list_id, account_id));
     }
-
+    /**
+     * 在跟新以后再实用这方法
+     * */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng sydney = new LatLng(-33.867, 151.206);
-//        googleMap.setMyLocationEnabled(true);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
-
-        googleMap.addMarker(new MarkerOptions()
-                .title("Sydney")
-                .snippet("The most populous city in Australia.")
-                .position(sydney));
+        Log.i("result", "我到这了吗");
+//        googleMap.addMarker(new MarkerOptions()
+//                .title("Sydney")
+//                .snippet("The most populous city in Australia.")
+//                .position(sydney));
+        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);//地图类型
+        googleMap.setIndoorEnabled(false);
+        LatLng sydney = new LatLng(-34, 151);
+        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"//这是设置点击title
+        ).snippet("the most populious city in Australia"));//这是设置点击message
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     @Override
